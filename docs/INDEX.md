@@ -2,6 +2,10 @@
 
 Welcome to DocForge documentation! This index helps you navigate through all available documentation.
 
+## 🌐 Live Application
+
+- **[Try DocForge Live](https://ishan96dev.github.io/DocForge/)** - Use DocForge directly in your browser (no installation needed)
+
 ## 📚 Getting Started
 
 - **[README](../README.md)** - Project overview, features, and quick introduction

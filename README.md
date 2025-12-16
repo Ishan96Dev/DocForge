@@ -11,6 +11,8 @@
 [![React 18](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Latest-teal.svg)](https://fastapi.tiangolo.com/)
 
+🚀 **[Try Live App](https://ishan96dev.github.io/DocForge/)** 🚀
+
 [Quick Start](docs/QUICKSTART.md) | [Documentation](docs/INDEX.md) | [Deploy](docs/DEPLOYMENT.md) | [API Docs](docs/API.md) | [Architecture](docs/ARCHITECTURE.md) | [Contributing](CONTRIBUTING.md)
 
 ---
@@ -30,9 +32,10 @@
 
 | Getting Started | Documentation | Development |
 |----------------|---------------|-------------|
-| [⚡ Quick Start](docs/QUICKSTART.md) | [📖 Documentation Index](docs/INDEX.md) | [🤝 Contributing](CONTRIBUTING.md) |
-| [🚀 Deployment Guide](docs/DEPLOYMENT.md) | [🏗️ Architecture](docs/ARCHITECTURE.md) | [👥 Contributors](docs/CONTRIBUTORS.md) |
-| [🛠️ API Reference](docs/API.md) | [📄 License](LICENSE) | [🐛 Report Issues](https://github.com/Ishan96Dev/DocForge/issues) |
+| [🌐 **Try Live App**](https://ishan96dev.github.io/DocForge/) | [📖 Documentation Index](docs/INDEX.md) | [🤝 Contributing](CONTRIBUTING.md) |
+| [⚡ Quick Start](docs/QUICKSTART.md) | [🏗️ Architecture](docs/ARCHITECTURE.md) | [👥 Contributors](docs/CONTRIBUTORS.md) |
+| [🚀 Deployment Guide](docs/DEPLOYMENT.md) | [📄 License](LICENSE) | [🐛 Report Issues](https://github.com/Ishan96Dev/DocForge/issues) |
+| [🛠️ API Reference](docs/API.md) | | |
 
 ---
 
@@ -48,6 +51,12 @@ Simply paste any website URL, and DocForge will:
 - 👁️ **Preview** before downloading  
 
 **No technical knowledge required** - just paste a URL and click!
+
+### 🌐 Try It Now!
+
+**Live Demo**: [https://ishan96dev.github.io/DocForge/](https://ishan96dev.github.io/DocForge/)
+
+No installation needed - use DocForge directly in your browser!
 
 ---
 
