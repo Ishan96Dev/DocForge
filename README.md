@@ -213,9 +213,8 @@ Want to deploy DocForge for free and share it with others?
 
 1. **Deploy Backend to Render.com** (5 minutes)
    - Sign up at [render.com](https://render.com) with GitHub
-   - Create new Web Service
-   - Connect **your fork** of the DocForge repository
-   - Configure: Docker, Root: `backend`, Plan: Free
+   - Create new Web Service → Connect your forked DocForge repository
+   - Configure: Language: `Docker`, Root Directory: `backend`, Instance Type: `Free`
    - **Save your unique backend URL**: `https://your-app-name-xxxx.onrender.com`
 
 2. **Configure Frontend** (2 minutes)

@@ -50,26 +50,67 @@ Ensure these files exist in your repository (already configured):
    - Connect your GitHub repository
    - Select **YOUR forked repository** (e.g., `your-username/DocForge`)
 
-2. **Configure Service**
-   ```
-   Name: your-app-name (choose any unique name)
-   Region: Choose closest to your users
-   Branch: main
-   Root Directory: backend
-   Environment: Docker
-   Instance Type: Free
-   ```
+2. **Configure Service** (Match these fields exactly):
    
-   > **Note**: Choose a unique name for your service. This will be part of your URL.
+   **Source Code**
+   - Repository: `your-username/DocForge`
+   - Branch: `main`
+   
+   **Name**
+   - Enter: `your-app-name` (choose any unique name, this becomes part of your URL)
+   
+   **Language**
+   - Select: `Docker`
+   
+   **Region**
+   - Choose: `Virginia (US East)` or closest to you
+   
+   **Root Directory** (Important!)
+   - Enter: `backend`
+   
+   **Dockerfile Path**
+   - Leave empty (defaults to `./Dockerfile` which is correct)
+   
+   **Instance Type**
+   - Select: `Free` ($0/month, 512MB RAM, 0.1 CPU)
+   
+   > **Note**: The service name you choose will be part of your URL: `https://your-app-name-xxxx.onrender.com`
+   
+   **Environment Variables** (Optional - can skip)
+   - Leave empty for now
+   - You can add these later if needed:
+     - `LOG_LEVEL=INFO` (optional - for debug logging)
+     - `MAX_PAGES=500` (optional - override default max pages)
 
-3. **Advanced Settings** (Optional)
-   - Auto-deploy: Yes (deploy on push to main)
-   - Health Check Path: `/health`
+3. **Configure Advanced Settings** (Click to expand "Advanced")
+   
+   **Health Check Path** (Recommended)
+   - Enter: `/health`
+   - This endpoint is already configured in your backend
+   - Render will ping this to check if your service is healthy
+   
+   **Docker Build Context Directory**
+   - Keep: `backend/` (already filled correctly)
+   
+   **Dockerfile Path**
+   - Keep: `backend/` (already filled correctly, will use `backend/Dockerfile`)
+   
+   **Docker Command** (Optional)
+   - Leave empty (Dockerfile has the correct CMD already)
+   
+   **Pre-Deploy Command** (Optional)
+   - Leave empty (not needed)
+   
+   **Auto-Deploy**
+   - Keep: `On Commit` (automatic deployment when you push to GitHub)
+   
+   **Build Filters** (Optional)
+   - Leave empty (deploy on any change)
 
-4. **Deploy**
-   - Click "Create Web Service"
+4. **Scroll Down and Click "Deploy Web Service"**
+   - Render will start building your backend
    - Wait 5-10 minutes for first build
-   - **IMPORTANT**: Copy **YOUR unique backend URL**: `https://your-app-name-xxxx.onrender.com`
+   - **IMPORTANT**: Once deployed, copy **YOUR unique backend URL**: `https://your-app-name-xxxx.onrender.com`
    
    > **Save this URL!** You'll need it to configure your frontend.
 
