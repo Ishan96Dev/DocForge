@@ -225,7 +225,8 @@ Want to deploy DocForge for free and share it with others?
 
 3. **Deploy Frontend to GitHub Pages** (3 minutes)
    - Go to **your repo** Settings → Secrets → Add `VITE_API_URL` secret with **your backend URL**
-   - Go to Settings → Pages → Source: "GitHub Actions"
+   - Go to Settings → Pages → **Source: Select "GitHub Actions"** (important!)
+   - Push your changes to trigger deployment
    - **Your app will be live at**: `https://your-username.github.io/DocForge/`
 
 > **Note**: Replace `your-username` with your GitHub username and `your-app-name-xxxx` with your Render app URL.

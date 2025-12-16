@@ -134,10 +134,14 @@ Add homepage field with **YOUR GitHub username**:
    - Value: **YOUR backend URL** (e.g., `https://your-app-name-xxxx.onrender.com`)
    - Click "Add secret"
 
-2. **Enable GitHub Pages**
-   - Settings → Pages
-   - Source: "GitHub Actions"
-   - Branch: main (or your default branch)
+2. **Enable GitHub Pages** (IMPORTANT!)
+   - Go to **YOUR repository** on GitHub
+   - Click **Settings** → **Pages** (in left sidebar)
+   - Under **"Build and deployment"**:
+     - **Source**: Select "**GitHub Actions**" (NOT "Deploy from a branch")
+   - Click **Save** if prompted
+   
+   > ⚠️ **Critical**: Make sure you select "GitHub Actions" as the source, not "Deploy from a branch"!
 
 3. **Push to GitHub**
    ```bash
@@ -222,6 +226,32 @@ Then enable GitHub Pages:
 - Try smaller page counts
 
 ### Frontend Issues
+
+**GitHub Actions Error: "Get Pages site failed" or "Not Found"**
+
+This means GitHub Pages is not enabled or configured correctly:
+
+1. **Enable Pages First**:
+   - Go to your repository on GitHub
+   - Settings → Pages
+   - **Source**: Must be "**GitHub Actions**" (NOT "Deploy from a branch")
+   - If you see "GitHub Pages is not enabled", it will be enabled automatically when you select the source
+
+2. **Check Workflow Permissions**:
+   - Settings → Actions → General
+   - Scroll to "Workflow permissions"
+   - Select "**Read and write permissions**"
+   - Check "**Allow GitHub Actions to create and approve pull requests**"
+   - Click Save
+
+3. **Re-run the Workflow**:
+   - Go to Actions tab
+   - Click on the failed workflow
+   - Click "Re-run all jobs"
+
+4. **Wait for Pages to Initialize**:
+   - First deployment may take 5-10 minutes
+   - Check Settings → Pages to see if it shows your site URL
 
 **Cannot connect to backend**
 - Verify `VITE_API_URL` is set correctly
