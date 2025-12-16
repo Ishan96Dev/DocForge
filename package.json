@@ -1,0 +1,24 @@
+{
+  "name": "docforge",
+  "version": "1.0.0",
+  "description": "Open-source website-to-PDF engine with intelligent crawling",
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && .\\venv\\Scripts\\activate && python start.py",
+    "dev:all": ".\\dev.bat",
+    "dev": ".\\dev.bat",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && python -m venv venv && .\\venv\\Scripts\\activate && pip install -r requirements.txt && playwright install chromium",
+    "build:frontend": "cd frontend && npm run build",
+    "setup": "npm run install:backend && npm run install:frontend"
+  },
+  "keywords": [
+    "pdf",
+    "website",
+    "crawler",
+    "documentation",
+    "export"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: docforge-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - MAX_URLS=500
+      - MAX_DEPTH=5
+      - REQUEST_DELAY=1.0
+      - EXPORT_DIR=/app/exports
+    volumes:
+      - ./backend:/app
+      - exports:/app/exports
+    networks:
+      - docforge-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: docforge-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - docforge-network
+    restart: unless-stopped
+
+volumes:
+  exports:
+    driver: local
+
+networks:
+  docforge-network:
+    driver: bridge
