@@ -143,14 +143,22 @@ Ensure these files exist in your repository (already configured):
 
 ### Step 1: Configure Frontend
 
-#### Update API URL
+> **Important Note**: You only need to add the GitHub Secret (Step 2 below). The `.env.production` file is **optional** and not required if you use GitHub Secrets!
 
-Create `frontend/.env.production` in **your repository**:
+#### Option A: Using GitHub Secrets (Recommended - More Secure)
+
+The GitHub Actions workflow will automatically inject your backend URL during the build process. Just add the secret in Step 2 below - **no `.env.production` file needed**!
+
+#### Option B: Using .env.production File (Alternative)
+
+If you prefer, you can create `frontend/.env.production` in **your repository**:
 ```env
 VITE_API_URL=https://your-app-name-xxxx.onrender.com
 ```
 
 > **IMPORTANT**: Replace `your-app-name-xxxx.onrender.com` with **YOUR actual Render backend URL** from Part 1.
+
+> ⚠️ **Note**: If you use GitHub Secrets (Option A), you don't need this file. The workflow uses the secret directly.
 
 #### Update package.json (if using manual deployment)
 
@@ -167,21 +175,22 @@ Add homepage field with **YOUR GitHub username**:
 
 #### Option A: GitHub Actions (Recommended - Automatic)
 
-1. **Add GitHub Secret**
+1. **Add GitHub Secret** (Required - This is all you need!)
    - Go to **YOUR repository** on GitHub
    - Settings → Secrets and variables → Actions
    - Click "New repository secret"
    - Name: `VITE_API_URL`
    - Value: **YOUR backend URL** (e.g., `https://your-app-name-xxxx.onrender.com`)
    - Click "Add secret"
-
-2. **Enable GitHub Pages**
+   
+   > ✅ **ThiWorkflow Permissions** (Required - Do this first!)
    - Go to **YOUR repository** on GitHub
-   - Click **Settings** → **Pages** (in left sidebar)
-   - Under **"Build and deployment"**:
-     - **Source**: Select "**Deploy from a branch**"
-     - **Branch**: Select "**gh-pages**" and "**/ (root)**"
+   - Settings → Actions → General
+   - Scroll to "Workflow permissions"
+   - Select **"Read and write permissions"**
    - Click **Save**
+   
+   > ⚠️ **Important**: This must be enabled or the deployment will fail!
    
    > Note: The `gh-pages` branch will be created automatically on first deployment
 
@@ -196,9 +205,19 @@ Add homepage field with **YOUR GitHub username**:
    - Go to Actions tab in **your repository**
    - Wait for workflow to complete (~2-3 minutes)
    - **Your site will be live at**: `https://your-username.github.io/DocForge/`
+   The workflow will build and deploy automatically
+   
+5. **Configure GitHub Pages Source** (After first successful deployment)
+   - Go to Settings → Pages
+   - Under **"Build and deployment"**:
+     - **Source**: Select "**Deploy from a branch**"
+     - **Branch**: Select "**gh-pages**" and "**/ (root)**"
+   - Click **Save**
+   - **Your site will be live at**: `https://your-username.github.io/DocForge/`
    
    > Replace `your-username` with your actual GitHub username.
-
+   
+   > 💡 **Note**: The `gh-pages` branch is created automatically by the first deployment
 #### Option B: Manual Deployment
 
 ```bash
