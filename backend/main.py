@@ -1,6 +1,11 @@
 """
 DocForge Backend API
 Main application entry point
+
+Created by: Ishan Chakraborty
+GitHub: https://github.com/Ishan96Dev
+LinkedIn: https://www.linkedin.com/in/ishan-chakraborty-0085571a1
+License: MIT
 """
 
 from fastapi import FastAPI

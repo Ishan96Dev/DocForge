@@ -6,7 +6,7 @@ import { CrawlProgress } from './components/CrawlProgress';
 import { PDFPreviewModal } from './components/PDFPreviewModal';
 import { analyzeUrl, startCrawl, getJobStatus, downloadPDF, previewPDF, checkBackendHealth } from './services/api';
 import { AnalyzeResponse, CrawlMode, CrawlConfig, JobStatusResponse } from './types';
-import { Github, FileCode, AlertTriangle, Server } from 'lucide-react';
+import { Github, FileCode, AlertTriangle, Server, Linkedin } from 'lucide-react';
 
 const queryClient = new QueryClient();
 
@@ -165,15 +165,28 @@ function AppContent() {
             </div>
             <span className="font-bold text-xl text-gray-900 group-hover:text-primary-600 transition-colors">DocForge</span>
           </div>
-          <a
-            href="https://github.com/Ishan96Dev/DocForge"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-all duration-300 group"
-          >
-            <Github className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-            <span className="hidden md:inline">GitHub</span>
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.linkedin.com/in/ishan-chakraborty-0085571a1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-all duration-300 group"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+              <span className="hidden md:inline">LinkedIn</span>
+            </a>
+            <a
+              href="https://github.com/Ishan96Dev/DocForge"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-all duration-300 group"
+              aria-label="GitHub Repository"
+            >
+              <Github className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+              <span className="hidden md:inline">GitHub</span>
+            </a>
+          </div>
         </div>
       </header>
 
@@ -284,13 +297,42 @@ function AppContent() {
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 mt-auto">
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="text-center text-gray-600 text-sm space-y-3">
+          <div className="text-center text-gray-600 text-sm space-y-4">
             <div className="flex items-center justify-center gap-2">
               <FileCode className="w-4 h-4 text-primary-600" strokeWidth={2.5} />
               <p className="font-medium text-gray-700">
                 Built with ❤️ for developers, researchers, and teams who need reliable knowledge snapshots.
               </p>
             </div>
+            
+            <div className="space-y-2">
+              <p className="text-gray-700 font-medium">
+                Created by Ishan Chakraborty
+              </p>
+              <div className="flex items-center justify-center gap-4">
+                <a
+                  href="https://github.com/Ishan96Dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-gray-600 hover:text-primary-600 transition-colors"
+                  aria-label="GitHub Profile"
+                >
+                  <Github className="w-4 h-4" />
+                  <span className="text-sm">GitHub</span>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/ishan-chakraborty-0085571a1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-gray-600 hover:text-primary-600 transition-colors"
+                  aria-label="LinkedIn Profile"
+                >
+                  <Linkedin className="w-4 h-4" />
+                  <span className="text-sm">LinkedIn</span>
+                </a>
+              </div>
+            </div>
+            
             <p className="text-gray-500">
               Open source • MIT License • Respects robots.txt
             </p>

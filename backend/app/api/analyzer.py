@@ -1,5 +1,8 @@
 """
 Analyzer API endpoints
+
+Created by: Ishan Chakraborty
+License: MIT
 """
 
 from fastapi import APIRouter, HTTPException
