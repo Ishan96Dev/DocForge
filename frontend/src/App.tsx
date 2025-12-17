@@ -4,7 +4,7 @@ import { Hero } from './components/Hero';
 import { AnalysisResult } from './components/AnalysisResult';
 import { CrawlProgress } from './components/CrawlProgress';
 import { PDFPreviewModal } from './components/PDFPreviewModal';
-import { analyzeUrl, startCrawl, getJobStatus, downloadPDF, previewPDF, checkBackendHealth } from './services/api';
+import { analyzeUrl, startCrawl, getJobStatus, downloadPDF, previewPDF } from './services/api';
 import { AnalyzeResponse, CrawlMode, CrawlConfig, JobStatusResponse } from './types';
 import { Github, FileCode, AlertTriangle, Linkedin } from 'lucide-react';
 
