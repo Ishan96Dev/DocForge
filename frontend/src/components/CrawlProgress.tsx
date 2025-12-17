@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { JobStatusResponse, CrawlStatus } from '../types';
 import { CheckCircle, XCircle, Loader, FileText, Download, Eye } from 'lucide-react';
 
@@ -9,14 +9,6 @@ interface CrawlProgressProps {
 }
 
 export const CrawlProgress: React.FC<CrawlProgressProps> = ({ jobStatus, onDownload, onPreview }) => {
-  const logsEndRef = useRef<HTMLDivElement>(null);
-  
-  // Auto-scroll logs to bottom
-  useEffect(() => {
-    if (logsEndRef.current) {
-      logsEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [jobStatus.logs]);
   const getStatusColor = (status: CrawlStatus): string => {
     const colors = {
       [CrawlStatus.PENDING]: 'bg-gray-500',
@@ -87,7 +79,7 @@ export const CrawlProgress: React.FC<CrawlProgressProps> = ({ jobStatus, onDownl
         {jobStatus.logs && jobStatus.logs.length > 0 && (
           <div className="space-y-3">
             <p className="text-sm font-medium text-gray-700">Activity Log</p>
-            <div className="max-h-48 overflow-y-auto bg-gray-900 rounded-xl p-4 space-y-1 scroll-smooth">
+            <div className="max-h-48 overflow-y-auto bg-gray-900 rounded-xl p-4 space-y-1">
               {jobStatus.logs.slice(-20).map((log, idx) => (
                 <div
                   key={idx}
@@ -96,8 +88,8 @@ export const CrawlProgress: React.FC<CrawlProgressProps> = ({ jobStatus, onDownl
                   {log}
                 </div>
               ))}
-              <div ref={logsEndRef} />
             </div>
+            <p className="text-xs text-gray-500 italic">💡 Scroll down to see latest activity</p>
           </div>
         )}
 

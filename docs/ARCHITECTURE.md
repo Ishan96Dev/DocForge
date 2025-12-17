@@ -61,11 +61,19 @@ This document provides a detailed overview of DocForge's architecture and design
 **Purpose**: Intelligently detect the best crawling strategy for a given URL.
 
 **Flow**:
-1. Check `robots.txt` for sitemap declarations
-2. Try common sitemap paths (`/sitemap.xml`, etc.)
-3. Parse HTML for sitemap links
-4. Validate discovered sitemaps
-5. Return suggested strategy
+1. **Single-Page Detection** (PRIORITY):
+   - Analyze link structure (anchor links vs. unique internal pages)
+   - Detect SPA frameworks (React, Vue, Angular, Next.js, Nuxt)
+   - Conservative rules to avoid false positives:
+     * ≥80% anchor/navigation links → single-page
+     * ≤2 unique pages + ≥60% navigation → single-page
+     * SPA framework + ≤3 pages + ≥70% navigation → single-page SPA
+   - Ensures multi-page sites (blogs, small sites) use recursive crawling
+2. Check `robots.txt` for sitemap declarations
+3. Try common sitemap paths (`/sitemap.xml`, etc.)
+4. Parse HTML for sitemap links
+5. Validate discovered sitemaps
+6. Return suggested strategy (SINGLE_PAGE, SITEMAP_URL, or RECURSIVE)
 
 **Key Files**:
 - `backend/app/detector/sitemap_detector.py`

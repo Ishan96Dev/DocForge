@@ -6,7 +6,7 @@ import { CrawlProgress } from './components/CrawlProgress';
 import { PDFPreviewModal } from './components/PDFPreviewModal';
 import { analyzeUrl, startCrawl, getJobStatus, downloadPDF, previewPDF, checkBackendHealth } from './services/api';
 import { AnalyzeResponse, CrawlMode, CrawlConfig, JobStatusResponse } from './types';
-import { Github, FileCode, AlertTriangle, Server, Linkedin } from 'lucide-react';
+import { Github, FileCode, AlertTriangle, Linkedin } from 'lucide-react';
 
 const queryClient = new QueryClient();
 
@@ -19,20 +19,6 @@ function AppContent() {
   const [isBackendHealthy, setIsBackendHealthy] = useState(true);
   const [showPreview, setShowPreview] = useState(false);
   const analysisResultRef = useRef<HTMLDivElement>(null);
-
-  // Check backend health on mount
-  useEffect(() => {
-    const checkHealth = async () => {
-      const healthy = await checkBackendHealth();
-      setIsBackendHealthy(healthy);
-      if (!healthy) {
-        setBackendError('Backend server is not responding. Please make sure the server is running.');
-      }
-    };
-    checkHealth();
-    const interval = setInterval(checkHealth, 30000); // Check every 30s
-    return () => clearInterval(interval);
-  }, []);
 
   // Auto-scroll to analysis result when it appears
   useEffect(() => {
@@ -144,17 +130,6 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 flex flex-col">
-      {/* Backend Error Banner */}
-      {!isBackendHealthy && (
-        <div className="bg-red-500 text-white px-4 py-3 shadow-lg">
-          <div className="max-w-7xl mx-auto flex items-center justify-center gap-3">
-            <Server className="w-5 h-5 animate-pulse" strokeWidth={2.5} />
-            <p className="font-medium">Backend Server Offline</p>
-            <span className="text-red-100">•</span>
-            <p className="text-sm">Please start the backend server to continue</p>
-          </div>
-        </div>
-      )}
 
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
@@ -203,7 +178,7 @@ function AppContent() {
             <Hero onAnalyze={handleAnalyze} isLoading={isAnalyzing} />
           )}
               
-          {/* Error Message */}
+          {/* Error Message - Only shown after user action */}
           {backendError && !jobStatus && !isAnalyzing && (
             <div className="max-w-4xl mx-auto bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-sm animate-shake">
               <div className="flex items-start gap-3">
@@ -211,6 +186,11 @@ function AppContent() {
                 <div className="flex-1">
                   <h3 className="font-semibold text-red-800 mb-1">Error</h3>
                   <p className="text-sm text-red-700">{backendError}</p>
+                  {!isBackendHealthy && (
+                    <p className="text-xs text-red-600 mt-2">
+                      💡 Tip: Make sure the backend server is running on <code className="bg-red-100 px-1 py-0.5 rounded">http://localhost:8000</code>
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

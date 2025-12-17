@@ -36,6 +36,12 @@ class SitemapDetector:
         """
         domain = self._get_domain(url)
         
+        # Step 0: Check if it's a single-page website (SPA or single scrolling page)
+        is_single_page = await self._detect_single_page_website(url)
+        if is_single_page:
+            print(f"[SitemapDetector] Detected single-page website: {url}")
+            return CrawlMode.SINGLE_PAGE, None
+        
         # Step 1: Check robots.txt
         sitemap_from_robots = await self._check_robots_txt(domain)
         if sitemap_from_robots:
@@ -103,6 +109,159 @@ class SitemapDetector:
             print(f"Error checking HTML for sitemap: {e}")
         
         return None
+    
+    async def _detect_single_page_website(self, url: str) -> bool:
+        """
+        Detect if the website is a single-page application or single scrolling page
+        
+        Checks for:
+        - SPA frameworks (React, Vue, Angular)
+        - Hash-based navigation (#section)
+        - Minimal internal links (most links are anchors)
+        - Single HTML page structure
+        
+        Returns:
+            True if detected as single-page website
+        """
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(
+                    url,
+                    headers={"User-Agent": self.user_agent},
+                    timeout=aiohttp.ClientTimeout(total=self.timeout)
+                ) as response:
+                    if response.status != 200:
+                        return False
+                    
+                    content = await response.text()
+                    content_lower = content.lower()
+                    
+                    # Check for SPA framework indicators
+                    spa_indicators = [
+                        'react',
+                        'vue.js',
+                        'vue.min.js',
+                        'angular',
+                        'ng-app',
+                        'data-react-root',
+                        '__next',  # Next.js
+                        '_next/static',  # Next.js
+                        'nuxt',  # Nuxt.js
+                    ]
+                    
+                    spa_score = sum(1 for indicator in spa_indicators if indicator in content_lower)
+                    
+                    # Parse HTML to analyze links
+                    from bs4 import BeautifulSoup
+                    soup = BeautifulSoup(content, 'html.parser')
+                    
+                    # Get all links
+                    all_links = soup.find_all('a', href=True)
+                    
+                    if not all_links:
+                        # No links at all, likely single page
+                        return True
+                    
+                    # Count different types of links
+                    anchor_links = 0  # Links to #sections on same page
+                    same_page_links = 0  # Links to same URL or just #
+                    external_links = 0
+                    internal_unique_pages = set()
+                    
+                    parsed_url = urlparse(url)
+                    domain = f"{parsed_url.scheme}://{parsed_url.netloc}"
+                    current_path = parsed_url.path.rstrip('/')
+                    
+                    for link in all_links:
+                        href = link.get('href', '').strip()
+                        
+                        if not href or href == '#':
+                            same_page_links += 1
+                            continue
+                        
+                        # Anchor link on same page
+                        if href.startswith('#'):
+                            anchor_links += 1
+                            continue
+                        
+                        # Parse the link
+                        if href.startswith('http'):
+                            link_parsed = urlparse(href)
+                            if link_parsed.netloc != parsed_url.netloc:
+                                external_links += 1
+                                continue
+                            
+                            # Same domain, check if different page
+                            link_path = link_parsed.path.rstrip('/')
+                            if link_path == current_path or link_path == '':
+                                if link_parsed.fragment:
+                                    anchor_links += 1
+                                else:
+                                    same_page_links += 1
+                            else:
+                                internal_unique_pages.add(link_path)
+                        else:
+                            # Relative URL
+                            if href.startswith('/'):
+                                link_path = href.split('#')[0].rstrip('/')
+                                if link_path == current_path or link_path == '':
+                                    if '#' in href:
+                                        anchor_links += 1
+                                    else:
+                                        same_page_links += 1
+                                else:
+                                    internal_unique_pages.add(link_path)
+                            else:
+                                # Relative to current path
+                                internal_unique_pages.add(href.split('#')[0])
+                    
+                    total_links = len(all_links)
+                    navigation_links = anchor_links + same_page_links
+                    unique_internal_pages = len(internal_unique_pages)
+                    
+                    print(f"[SitemapDetector] Link analysis for {url}:")
+                    print(f"  Total links: {total_links}")
+                    print(f"  Anchor links (#sections): {anchor_links}")
+                    print(f"  Same page links: {same_page_links}")
+                    print(f"  Unique internal pages: {unique_internal_pages}")
+                    print(f"  External links: {external_links}")
+                    print(f"  SPA indicators: {spa_score}")
+                    
+                    # Decision logic (conservative to avoid false positives):
+                    # 1. STRONG: 80%+ links are navigation (anchors/same-page) → clearly single-page
+                    # 2. MODERATE: ≤2 unique pages + 60%+ navigation → likely single-page with minimal structure
+                    # 3. SPA: Framework detected + ≤3 unique pages + 70%+ navigation → single-page SPA
+                    # Otherwise: Use recursive/sitemap crawling for multi-page sites
+                    
+                    if total_links == 0:
+                        # No links at all - could be a simple landing page
+                        return True
+                    
+                    navigation_ratio = navigation_links / total_links
+                    
+                    # Rule 1: Strong single-page indicator (80%+ navigation links)
+                    if navigation_ratio >= 0.8:
+                        print(f"[SitemapDetector] Single-page detected: {navigation_ratio*100:.1f}% navigation links")
+                        return True
+                    
+                    # Rule 2: Very few unique pages + high navigation ratio
+                    # (Avoids classifying small blogs/sites with 3-4 pages as single-page)
+                    if unique_internal_pages <= 2 and navigation_ratio >= 0.6:
+                        print(f"[SitemapDetector] Single-page detected: only {unique_internal_pages} pages, {navigation_ratio*100:.1f}% navigation")
+                        return True
+                    
+                    # Rule 3: SPA framework with minimal routing + high navigation
+                    if spa_score >= 2 and unique_internal_pages <= 3 and navigation_ratio >= 0.7:
+                        print(f"[SitemapDetector] Single-page SPA detected: {spa_score} indicators, {unique_internal_pages} pages, {navigation_ratio*100:.1f}% navigation")
+                        return True
+                    
+                    # Not a single-page site - will fall through to sitemap or recursive crawling
+                    print(f"[SitemapDetector] Multi-page site detected - will use sitemap or recursive crawling")
+                    return False
+                    
+        except Exception as e:
+            print(f"Error detecting single-page website: {e}")
+            return False
     
     async def _validate_sitemap(self, sitemap_url: str, source: str) -> Optional[SitemapInfo]:
         """
