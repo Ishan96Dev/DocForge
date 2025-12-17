@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Hero } from './components/Hero';
 import { AnalysisResult } from './components/AnalysisResult';
@@ -18,14 +18,6 @@ function AppContent() {
   const [backendError, setBackendError] = useState<string | null>(null);
   const [isBackendHealthy, setIsBackendHealthy] = useState(true);
   const [showPreview, setShowPreview] = useState(false);
-  const analysisResultRef = useRef<HTMLDivElement>(null);
-
-  // Auto-scroll to analysis result when it appears
-  useEffect(() => {
-    if (analysisResult && analysisResultRef.current) {
-      analysisResultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [analysisResult]);
 
   const handleAnalyze = async (url: string) => {
     setIsAnalyzing(true);
@@ -234,7 +226,7 @@ function AppContent() {
 
           {/* Analysis Result */}
           {analysisResult && !jobStatus && (
-            <div ref={analysisResultRef}>
+            <div>
               <AnalysisResult
                 result={analysisResult}
                 onStartCrawl={handleStartCrawl}
