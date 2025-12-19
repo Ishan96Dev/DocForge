@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/Ishan96Dev/DocForge/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Security Vulnerability
+    url: https://github.com/Ishan96Dev/DocForge/security/advisories/new
+    about: Report security vulnerabilities privately

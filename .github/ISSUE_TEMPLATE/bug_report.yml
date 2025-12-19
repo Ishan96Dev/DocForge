@@ -1,0 +1,148 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in DocForge
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees:
+  - Ishan96Dev
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us investigate the issue.
+  
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected?
+      options:
+        - Backend API
+        - Frontend UI
+        - Crawler (Recursive/Single/Sitemap)
+        - PDF Exporter
+        - Content Renderer
+        - Configuration
+        - Docker Setup
+        - Other
+    validations:
+      required: true
+  
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected to happen instead
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to Reproduce
+      description: Please provide detailed steps to reproduce the issue
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Enter URL '...'
+        4. See error
+    validations:
+      required: true
+  
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: Describe the expected behavior
+    validations:
+      required: true
+  
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Describe what actually happened
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: deployment-method
+    attributes:
+      label: Deployment Method
+      description: How are you running DocForge?
+      options:
+        - Docker (docker-compose)
+        - Local Development
+        - Production Server
+        - Other
+    validations:
+      required: true
+  
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version of DocForge are you running?
+      placeholder: ex. v1.0.0 or commit hash
+    validations:
+      required: false
+  
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: |
+        Please provide your environment details:
+        - OS (Windows/Linux/macOS)
+        - Browser (if frontend issue)
+        - Python version (if backend issue)
+        - Node.js version (if frontend issue)
+      placeholder: |
+        OS: Windows 11
+        Browser: Chrome 120
+        Python: 3.11
+        Node.js: 20.x
+    validations:
+      required: true
+  
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Please copy and paste any relevant log output
+      render: shell
+    validations:
+      required: false
+  
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem (screenshots, error messages, etc.)
+      placeholder: Add screenshots, links, or additional information here
+    validations:
+      required: false
+  
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to ensure this is not a duplicate
+          required: true
+        - label: I have provided all the required information above
+          required: true
+        - label: I am willing to help test fixes for this issue
+          required: false
