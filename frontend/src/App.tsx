@@ -6,7 +6,7 @@ import { CrawlProgress } from './components/CrawlProgress';
 import { PDFPreviewModal } from './components/PDFPreviewModal';
 import { analyzeUrl, startCrawl, getJobStatus, downloadPDF, previewPDF } from './services/api';
 import { AnalyzeResponse, CrawlMode, CrawlConfig, JobStatusResponse } from './types';
-import { Github, FileCode, AlertTriangle, Linkedin } from 'lucide-react';
+import { Github, FileCode, AlertTriangle, Linkedin, BookOpen } from 'lucide-react';
 
 const queryClient = new QueryClient();
 
@@ -157,6 +157,16 @@ function AppContent() {
             >
               <Github className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
               <span className="hidden md:inline">GitHub</span>
+            </a>
+            <a
+              href="https://ishan96dev.github.io/DocForge/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-all duration-300 group shadow-sm hover:shadow-md"
+              aria-label="Documentation"
+            >
+              <BookOpen className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+              <span className="font-medium">Docs</span>
             </a>
           </div>
         </div>
