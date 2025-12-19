@@ -92,7 +92,9 @@ No installation needed - use DocForge directly in your browser!
 
 Watch this quick tutorial to see how easy it is to convert any website into a professional PDF:
 
-[![Watch the video](https://cdn.loom.com/sessions/thumbnails/a03797b7c48d482ba5c11088c42c3898-with-play.gif)](https://www.loom.com/share/a03797b7c48d482ba5c11088c42c3898)
+<a href="https://www.loom.com/share/a03797b7c48d482ba5c11088c42c3898">
+  <img src="https://cdn.loom.com/sessions/thumbnails/a03797b7c48d482ba5c11088c42c3898-with-play.gif" alt="DocForge Tutorial Video" width="600">
+</a>
 
 *Learn how to use DocForge from URL input to PDF download in just a few minutes!*
 
