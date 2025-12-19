@@ -179,6 +179,19 @@ class ContentRenderer:
                 continue
                 
             try:
+                # Check if it's already a data URI (base64 encoded)
+                if src.startswith('data:image'):
+                    print(f"[ContentRenderer] Image already embedded as data URI, skipping download...")
+                    processed += 1
+                    
+                    # Ensure alt text exists
+                    if not img.get('alt'):
+                        img['alt'] = 'Image'
+                    
+                    # Add styling
+                    img['style'] = 'max-width: 100%; height: auto; display: block; margin: 10px 0;'
+                    continue
+                
                 # Convert to absolute URL
                 absolute_src = urljoin(base_url, src)
                 print(f"[ContentRenderer] Downloading image: {absolute_src[:80]}...")
