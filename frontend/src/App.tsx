@@ -159,7 +159,7 @@ function AppContent() {
               <span className="hidden md:inline">GitHub</span>
             </a>
             <a
-              href="https://ishan96dev.github.io/DocForge/"
+              href="https://ishan96dev.github.io/DocForge/docs/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-all duration-300 group shadow-sm hover:shadow-md"

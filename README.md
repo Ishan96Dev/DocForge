@@ -13,6 +13,8 @@
 
 🚀 **[Try Live App](https://ishan96dev.github.io/DocForge/)** 🚀
 
+📚 **[Documentation Site](https://ishan96dev.github.io/DocForge/docs/)** 📚
+
 [Quick Start](docs/QUICKSTART.md) | [Documentation](docs/INDEX.md) | [Deploy](docs/DEPLOYMENT.md) | [API Docs](docs/API.md) | [Architecture](docs/ARCHITECTURE.md) | [Contributing](CONTRIBUTING.md)
 
 ---
