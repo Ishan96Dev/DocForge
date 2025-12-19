@@ -7,7 +7,7 @@ import Features from './pages/Features';
 
 function App() {
   return (
-    <BrowserRouter basename="/DocForge">
+    <BrowserRouter basename="/DocForge/docs">
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />

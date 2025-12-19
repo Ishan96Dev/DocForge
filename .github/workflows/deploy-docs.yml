@@ -32,6 +32,11 @@ jobs:
         working-directory: ./docs-site
         run: npm run build
 
+      - name: List build output
+        run: |
+          echo "Build output contents:"
+          ls -la ./docs-site/dist
+
       - name: Deploy to GitHub Pages (docs subdirectory)
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -39,3 +44,9 @@ jobs:
           publish_dir: ./docs-site/dist
           destination_dir: docs
           keep_files: true
+
+      - name: Post Setup Node.js
+        run: |
+          echo "📚 Documentation deployed successfully!"
+          echo "🌐 Access your docs at: https://ishan96dev.github.io/DocForge/docs/"
+          echo "📝 If you can't access it, wait 1-2 minutes for GitHub Pages to update"

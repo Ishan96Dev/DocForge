@@ -33,7 +33,7 @@ export default function UserGuide() {
               
               <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200 mb-4">
                 <img
-                  src="/DocForge/screenshots/Link-input.png"
+                  src="/DocForge/docs/screenshots/Link-input.png"
                   alt="URL Input Field"
                   className="w-full rounded-lg shadow-md"
                 />
@@ -68,7 +68,7 @@ export default function UserGuide() {
               
               <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200 mb-4">
                 <img
-                  src="/DocForge/screenshots/analyzing-website.png"
+                  src="/DocForge/docs/screenshots/analyzing-website.png"
                   alt="Website Analysis"
                   className="w-full rounded-lg shadow-md"
                 />
@@ -77,7 +77,7 @@ export default function UserGuide() {
 
               <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200">
                 <img
-                  src="/DocForge/screenshots/Analyze-complete-screen.png"
+                  src="/DocForge/docs/screenshots/Analyze-complete-screen.png"
                   alt="Analysis Complete"
                   className="w-full rounded-lg shadow-md"
                 />
@@ -103,7 +103,7 @@ export default function UserGuide() {
               
               <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200 mb-6">
                 <img
-                  src="/DocForge/screenshots/Choose-your-Scrapping-method.png"
+                  src="/DocForge/docs/screenshots/Choose-your-Scrapping-method.png"
                   alt="Choose Scraping Method"
                   className="w-full rounded-lg shadow-md"
                 />
@@ -153,7 +153,7 @@ export default function UserGuide() {
               
               <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200">
                 <img
-                  src="/DocForge/screenshots/Maximum-pages-to-scrape.png"
+                  src="/DocForge/docs/screenshots/Maximum-pages-to-scrape.png"
                   alt="Maximum Pages Configuration"
                   className="w-full rounded-lg shadow-md"
                 />
@@ -188,7 +188,7 @@ export default function UserGuide() {
               
               <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200">
                 <img
-                  src="/DocForge/screenshots/Processing-scrapping-with-logs.png"
+                  src="/DocForge/docs/screenshots/Processing-scrapping-with-logs.png"
                   alt="Processing with Logs"
                   className="w-full rounded-lg shadow-md"
                 />
@@ -224,7 +224,7 @@ export default function UserGuide() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200">
                   <img
-                    src="/DocForge/screenshots/PDF-preview.png"
+                    src="/DocForge/docs/screenshots/PDF-preview.png"
                     alt="PDF Preview"
                     className="w-full rounded-lg shadow-md"
                   />
@@ -232,7 +232,7 @@ export default function UserGuide() {
                 </div>
                 <div className="bg-gray-50 rounded-xl p-4 border-2 border-gray-200">
                   <img
-                    src="/DocForge/screenshots/Download-PDF.png"
+                    src="/DocForge/docs/screenshots/Download-PDF.png"
                     alt="Download PDF"
                     className="w-full rounded-lg shadow-md"
                   />
